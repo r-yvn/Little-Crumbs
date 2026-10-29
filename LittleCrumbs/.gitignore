@@ -1,0 +1,7 @@
+# .NET build outputs
+bin/
+obj/
+.vs/
+
+# Node.js modules (Tailwind CLI)
+node_modules/
