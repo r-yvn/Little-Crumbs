@@ -1,6 +1,6 @@
-using BlazorAppName.Models;
+using LittleCrumbs.Models;
 
-namespace BlazorAppName.Services;
+namespace LittleCrumbs.Services;
 
 public class RecipeService
 {

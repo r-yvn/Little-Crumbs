@@ -1,4 +1,4 @@
-namespace BlazorAppName.Models;
+namespace LittleCrumbs.Models;
 
 public class RecipeModel
 {

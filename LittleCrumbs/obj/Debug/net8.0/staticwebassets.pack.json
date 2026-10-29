@@ -1,0 +1,45 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\L23Y16W05\\Documents\\B_MidT\\LittleCrumbs\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\LittleCrumbs.bundle.scp.css",
+      "PackagePath": "staticwebassets\\LittleCrumbs.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\L23Y16W05\\Documents\\B_MidT\\LittleCrumbs\\wwwroot\\app.css",
+      "PackagePath": "staticwebassets\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\L23Y16W05\\Documents\\B_MidT\\LittleCrumbs\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\L23Y16W05\\Documents\\B_MidT\\LittleCrumbs\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\L23Y16W05\\Documents\\B_MidT\\LittleCrumbs\\wwwroot\\css\\app.css",
+      "PackagePath": "staticwebassets\\css\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\L23Y16W05\\Documents\\B_MidT\\LittleCrumbs\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.LittleCrumbs.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.LittleCrumbs.props",
+      "PackagePath": "build\\LittleCrumbs.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.LittleCrumbs.props",
+      "PackagePath": "buildMultiTargeting\\LittleCrumbs.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.LittleCrumbs.props",
+      "PackagePath": "buildTransitive\\LittleCrumbs.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

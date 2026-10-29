@@ -1,10 +1,13 @@
 using LittleCrumbs.Components;
+using LittleCrumbs.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+builder.Services.AddSingleton<RecipeService>();
 
 var app = builder.Build();
 
