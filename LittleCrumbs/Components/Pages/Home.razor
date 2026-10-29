@@ -1,7 +1,112 @@
 ﻿@page "/"
+@using LittleCrumbs.Models
 
-<PageTitle>Home</PageTitle>
+<div class="min-h-screen bg-[#F7F4EE] text-stone-800 pb-16">
+    <!-- Hero Section -->
+    <div class="relative bg-[#4A2E1B] text-[#F7F4EE] py-20 px-6 sm:px-12 rounded-b-3xl shadow-lg mb-12 overflow-hidden">
+        <div class="absolute inset-0 opacity-15 bg-[radial-gradient(#fde68a_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="max-w-4xl mx-auto relative z-10 text-center">
+            <span class="inline-block bg-[#3B2414] text-amber-200 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider mb-4 border border-[#5C3A21]">
+                Freshly Baked Daily
+            </span>
+            <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight mb-4 font-serif">
+                Bake Life Sweeter, <br/><span class="text-amber-200">One Recipe at a Time</span>
+            </h1>
+            <p class="text-lg sm:text-xl text-amber-100 max-w-2xl mx-auto mb-8 font-light">
+                Discover foolproof artisan pastries, decadent cakes, and cozy homemade treats straight from our digital oven.
+            </p>
+            <div class="flex justify-center gap-4">
+                <a href="/catalog" style="text-decoration: none; color: #4A2E1B;" class="bg-amber-500 hover:bg-amber-600 font-semibold px-8 py-3 rounded-xl shadow-md transition-all transform hover:-translate-y-0.5">
+                    Browse Cookbook
+                </a>
+            </div>
+        </div>
+    </div>
 
-<h1>Hello, world!</h1>
+    <!-- Main Container -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <!-- Quick Categories with Clickable Square Cards -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold font-serif text-[#4A2E1B] mb-6">Explore Sweet Categories</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                @foreach (var cat in categories)
+                {
+                    <a href="/catalog?category=@Uri.EscapeDataString(cat.FilterCategory)" 
+                       style="text-decoration: none;" 
+                       class="bg-white rounded-2xl shadow-sm border border-[#EBE3D5] overflow-hidden hover:shadow-md hover:border-amber-300 transition cursor-pointer group flex flex-col">
+                        <div class="w-full aspect-square overflow-hidden bg-amber-50 relative">
+                            <img src="@cat.ImageUrl" alt="@cat.Name" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+                        </div>
+                        <div class="p-4 text-center">
+                            <h3 class="font-semibold text-stone-800 text-sm group-hover:text-[#4A2E1B] transition">@cat.Name</h3>
+                            <p class="text-xs text-stone-500 mt-0.5">@cat.Count recipes</p>
+                        </div>
+                    </a>
+                }
+            </div>
+        </div>
 
-Welcome to your new app.
+        <!-- Featured Treats Section -->
+        <div>
+            <div class="flex justify-between items-end mb-6">
+                <div>
+                    <h2 class="text-2xl font-bold font-serif text-[#4A2E1B]">Featured Bakery Treats</h2>
+                    <p class="text-sm text-stone-600">Hand-picked favorites loved by our community bakers.</p>
+                </div>
+                <a href="/catalog" style="text-decoration: none;" class="text-[#4A2E1B] font-medium hover:underline text-sm flex items-center gap-1">
+                    View all &rarr;
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                @foreach (var recipe in featuredRecipes)
+                {
+                    <div class="bg-white rounded-2xl shadow-sm border border-[#EBE3D5] overflow-hidden hover:shadow-md transition group flex flex-col">
+                        <div class="w-full aspect-square relative overflow-hidden bg-amber-50">
+                            <img src="@recipe.ImageUrl" alt="@recipe.Title" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+                            <span class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-[#4A2E1B] text-xs font-bold px-2.5 py-1 rounded-full shadow-sm">
+                                @recipe.Category
+                            </span>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between text-xs text-stone-500 mb-2">
+                                    <span>⏱️ @recipe.PrepTimeMinutes mins</span>
+                                    <span>⭐ @recipe.Rating (@recipe.ReviewCount reviews)</span>
+                                </div>
+                                <h3 class="text-xl font-bold text-stone-900 group-hover:text-[#4A2E1B] transition mb-2 font-serif">
+                                    @recipe.Title
+                                </h3>
+                                <p class="text-stone-600 text-sm line-clamp-2 mb-4">
+                                    @recipe.Description
+                                </p>
+                            </div>
+                            <a href="/recipe/@recipe.Id" style="text-decoration: none; color: #4A2E1B;" class="w-full text-center bg-amber-50 hover:bg-amber-100 font-medium py-2.5 rounded-xl transition text-sm block">
+                                View Recipe Guide
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private record CategoryCard(string Name, string ImageUrl, int Count, string FilterCategory);
+
+    private List<CategoryCard> categories = new()
+    {
+        new("Cakes & Tarts", "images/cake.jpg", 14, "Cakes"),
+        new("Artisan Breads", "images/bread.jpg", 9, "Pastries"),
+        new("Cookies & Biscuits", "images/cookies.jpg", 18, "Cookies"),
+        new("Pastries & Sweets", "images/pastry.jpg", 12, "Pastries")
+    };
+
+    private List<RecipeModel> featuredRecipes = new()
+    {
+        new RecipeModel { Id = 1, Title = "Strawberry Matcha Layer Cake", Description = "A delightful fusion of earthy Japanese matcha sponge and sweet fresh strawberry cream filling.", Category = "Cakes", ImageUrl = "images/Strawberry Matcha Layer Cake.jpg", PrepTimeMinutes = 45, Rating = 4.9, ReviewCount = 38 },
+        new RecipeModel { Id = 2, Title = "Flaky Butter Croissants", Description = "Master the art of lamination with golden, crispy layers of buttery pastry perfection.", Category = "Pastries", ImageUrl = "images/Flaky Butter Croissants.jpeg", PrepTimeMinutes = 180, Rating = 4.8, ReviewCount = 24 },
+        new RecipeModel { Id = 3, Title = "Chunky Chocolate Chip Cookies", Description = "Crispy on the outside, gooey on the inside with pools of dark chocolate chunks.", Category = "Cookies", ImageUrl = "images/Chunky Chocolate Chip Cookies.jpg", PrepTimeMinutes = 25, Rating = 5.0, ReviewCount = 56 }
+    };
+}
