@@ -25,6 +25,46 @@
       "PackagePath": "staticwebassets\\favicon.png"
     },
     {
+      "Id": "C:\\Users\\L23Y16W05\\Documents\\B_MidT\\LittleCrumbs\\wwwroot\\images\\Chunky Chocolate Chip Cookies.jpg",
+      "PackagePath": "staticwebassets\\images\\Chunky Chocolate Chip Cookies.jpg"
+    },
+    {
+      "Id": "C:\\Users\\L23Y16W05\\Documents\\B_MidT\\LittleCrumbs\\wwwroot\\images\\Classic Cinnamon Rolls.jpg",
+      "PackagePath": "staticwebassets\\images\\Classic Cinnamon Rolls.jpg"
+    },
+    {
+      "Id": "C:\\Users\\L23Y16W05\\Documents\\B_MidT\\LittleCrumbs\\wwwroot\\images\\Double Fudge Brownies.jpg",
+      "PackagePath": "staticwebassets\\images\\Double Fudge Brownies.jpg"
+    },
+    {
+      "Id": "C:\\Users\\L23Y16W05\\Documents\\B_MidT\\LittleCrumbs\\wwwroot\\images\\Flaky Butter Croissants.jpeg",
+      "PackagePath": "staticwebassets\\images\\Flaky Butter Croissants.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\L23Y16W05\\Documents\\B_MidT\\LittleCrumbs\\wwwroot\\images\\Lemon Raspberry Tart.jpg",
+      "PackagePath": "staticwebassets\\images\\Lemon Raspberry Tart.jpg"
+    },
+    {
+      "Id": "C:\\Users\\L23Y16W05\\Documents\\B_MidT\\LittleCrumbs\\wwwroot\\images\\Strawberry Matcha Layer Cake.jpg",
+      "PackagePath": "staticwebassets\\images\\Strawberry Matcha Layer Cake.jpg"
+    },
+    {
+      "Id": "C:\\Users\\L23Y16W05\\Documents\\B_MidT\\LittleCrumbs\\wwwroot\\images\\bread.jpg",
+      "PackagePath": "staticwebassets\\images\\bread.jpg"
+    },
+    {
+      "Id": "C:\\Users\\L23Y16W05\\Documents\\B_MidT\\LittleCrumbs\\wwwroot\\images\\cake.jpg",
+      "PackagePath": "staticwebassets\\images\\cake.jpg"
+    },
+    {
+      "Id": "C:\\Users\\L23Y16W05\\Documents\\B_MidT\\LittleCrumbs\\wwwroot\\images\\cookies.jpg",
+      "PackagePath": "staticwebassets\\images\\cookies.jpg"
+    },
+    {
+      "Id": "C:\\Users\\L23Y16W05\\Documents\\B_MidT\\LittleCrumbs\\wwwroot\\images\\pastry.jpg",
+      "PackagePath": "staticwebassets\\images\\pastry.jpg"
+    },
+    {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.LittleCrumbs.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },
