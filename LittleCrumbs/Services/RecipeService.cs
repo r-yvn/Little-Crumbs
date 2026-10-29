@@ -40,7 +40,7 @@ public class RecipeService
             Title = "Flaky Butter Croissants",
             Description = "Master the art of lamination with golden, crispy layers of buttery pastry perfection.",
             Category = "Pastries",
-            ImageUrl = "images/Flaky Butter Croissants.jpg",
+            ImageUrl = "images/Flaky Butter Croissants.jpeg",
             PrepTimeMinutes = 180,
             BakeTimeMinutes = 20,
             Servings = 6,
