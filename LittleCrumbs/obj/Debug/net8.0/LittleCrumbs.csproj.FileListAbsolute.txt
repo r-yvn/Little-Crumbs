@@ -29,3 +29,4 @@ C:\Users\L23Y16W05\Documents\B_MidT\LittleCrumbs\obj\Debug\net8.0\refint\LittleC
 C:\Users\L23Y16W05\Documents\B_MidT\LittleCrumbs\obj\Debug\net8.0\LittleCrumbs.pdb
 C:\Users\L23Y16W05\Documents\B_MidT\LittleCrumbs\obj\Debug\net8.0\LittleCrumbs.genruntimeconfig.cache
 C:\Users\L23Y16W05\Documents\B_MidT\LittleCrumbs\obj\Debug\net8.0\ref\LittleCrumbs.dll
+C:\Users\L23Y16W05\Documents\B_MidT\LittleCrumbs\obj\Debug\net8.0\LittleCrumbs.sourcelink.json

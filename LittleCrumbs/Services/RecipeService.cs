@@ -85,6 +85,90 @@ public class RecipeService
                 new BakingStepItem { Number = 1, Title = "Cream & Mix", Instruction = "Whisk melted butter with brown and white sugar. Fold in flour and dark chocolate chunks." },
                 new BakingStepItem { Number = 2, Title = "Bake", Instruction = "Scoop onto lined baking sheets and bake at 190°C (375°F) for 10-12 minutes until edges are golden." }
             }
+        },
+        new RecipeModel
+        {
+            Id = 4,
+            Title = "Classic Cinnamon Rolls",
+            Description = "Soft, fluffy dough swirled with rich cinnamon brown sugar and topped with cream cheese glaze.",
+            Category = "Pastries",
+            ImageUrl = "images/Classic Cinnamon Rolls.jpg",
+            PrepTimeMinutes = 90,
+            BakeTimeMinutes = 25,
+            Servings = 9,
+            Rating = 4.9,
+            ReviewCount = 42,
+            IsFeatured = true,
+            Ingredients = new()
+            {
+                new IngredientItem { Name = "Bread Flour", Amount = "3.5 cups" },
+                new IngredientItem { Name = "Warm Milk", Amount = "1/2 cup" },
+                new IngredientItem { Name = "Unsalted Butter (Softened)", Amount = "1/3 cup" },
+                new IngredientItem { Name = "Brown Sugar & Cinnamon Filling", Amount = "1 cup" },
+                new IngredientItem { Name = "Cream Cheese Glaze", Amount = "150g" }
+            },
+            Steps = new()
+            {
+                new BakingStepItem { Number = 1, Title = "Knead & Rise", Instruction = "Knead ingredients into a smooth, elastic dough and let rise in a warm spot until doubled in size." },
+                new BakingStepItem { Number = 2, Title = "Roll & Swirl", Instruction = "Roll dough into a rectangle, spread with butter and cinnamon sugar, roll tight, and slice into even rolls." },
+                new BakingStepItem { Number = 3, Title = "Bake & Glaze", Instruction = "Bake at 180°C (350°F) for 25 minutes until golden, then spread cream cheese glaze over warm rolls." }
+            }
+        },
+        new RecipeModel
+        {
+            Id = 5,
+            Title = "Lemon Raspberry Tart",
+            Description = "Zesty lemon curd paired with tart fresh raspberries in a buttery shortcrust pastry shell.",
+            Category = "Cakes",
+            ImageUrl = "images/Lemon Raspberry Tart.jpg",
+            PrepTimeMinutes = 60,
+            BakeTimeMinutes = 20,
+            Servings = 6,
+            Rating = 4.7,
+            ReviewCount = 19,
+            IsFeatured = true,
+            Ingredients = new()
+            {
+                new IngredientItem { Name = "Shortcrust Pastry Shell", Amount = "1.5 cups" },
+                new IngredientItem { Name = "Fresh Lemon Juice", Amount = "3/4 cup" },
+                new IngredientItem { Name = "Large Eggs", Amount = "4 whole" },
+                new IngredientItem { Name = "Granulated Sugar", Amount = "150g" },
+                new IngredientItem { Name = "Fresh Raspberries", Amount = "1 cup" }
+            },
+            Steps = new()
+            {
+                new BakingStepItem { Number = 1, Title = "Blind Bake Crust", Instruction = "Press shortcrust pastry into a tart pan, weigh down with parchment and beans, and bake until golden." },
+                new BakingStepItem { Number = 2, Title = "Lemon Curd Filling", Instruction = "Whisk lemon juice, eggs, and sugar together, pour into the warm crust, and bake until set." },
+                new BakingStepItem { Number = 3, Title = "Garnish & Chill", Instruction = "Top generously with fresh raspberries and chill before serving." }
+            }
+        },
+        new RecipeModel
+        {
+            Id = 6,
+            Title = "Double Fudge Brownies",
+            Description = "Rich, dense, and deeply chocolatey fudge squares topped with flaky sea salt.",
+            Category = "Cookies",
+            ImageUrl = "images/Double Fudge Brownies.jpg",
+            PrepTimeMinutes = 35,
+            BakeTimeMinutes = 25,
+            Servings = 16,
+            Rating = 4.9,
+            ReviewCount = 61,
+            IsFeatured = true,
+            Ingredients = new()
+            {
+                new IngredientItem { Name = "Dark Chocolate (Chopped)", Amount = "200g" },
+                new IngredientItem { Name = "Unsalted Butter", Amount = "1/2 cup" },
+                new IngredientItem { Name = "Granulated Sugar", Amount = "1.5 cups" },
+                new IngredientItem { Name = "Large Eggs", Amount = "3 whole" },
+                new IngredientItem { Name = "Flaky Sea Salt", Amount = "1 tsp" }
+            },
+            Steps = new()
+            {
+                new BakingStepItem { Number = 1, Title = "Melt Chocolate & Butter", Instruction = "Melt dark chocolate and butter together over a gentle double boiler until glossy and smooth." },
+                new BakingStepItem { Number = 2, Title = "Whisk Batter", Instruction = "Whisk in sugar and eggs until thick, then gently fold in flour and cocoa powder." },
+                new BakingStepItem { Number = 3, Title = "Bake & Sprinkle", Instruction = "Bake at 175°C (350°F) for 25 minutes. Sprinkle flaky sea salt on top right as they come out." }
+            }
         }
     };
 
