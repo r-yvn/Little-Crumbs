@@ -91,7 +91,15 @@ public class RecipeService
     {
         await _supabase.From<RecipeModel>()
             .Where(r => r.Id == recipe.Id)
-            .Update(recipe);
+            .Set(r => r.Title, recipe.Title)
+            .Set(r => r.Description, recipe.Description)
+            .Set(r => r.Category, recipe.Category)
+            .Set(r => r.ImageUrl, recipe.ImageUrl)
+            .Set(r => r.PrepTimeMinutes, recipe.PrepTimeMinutes)
+            .Set(r => r.BakeTimeMinutes, recipe.BakeTimeMinutes)
+            .Set(r => r.Servings, recipe.Servings)
+            .Set(r => r.IsFeatured, recipe.IsFeatured)
+            .Update();
     }
 
     public async Task DeleteRecipeAsync(int id)

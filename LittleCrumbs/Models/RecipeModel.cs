@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using Supabase.Postgrest.Attributes;
 using Supabase.Postgrest.Models;
 
@@ -39,8 +40,13 @@ public class RecipeModel : BaseModel
     [Column("is_featured")]
     public bool IsFeatured { get; set; }
 
-    // Navigation lists loaded from child tables (not columns on recipes)
+    // Navigation lists loaded from child tables — ignore during PostgREST insert/update
+    [Column(ignoreOnInsert: true, ignoreOnUpdate: true)]
     public List<IngredientItem> Ingredients { get; set; } = new();
+
+    [Column(ignoreOnInsert: true, ignoreOnUpdate: true)]
     public List<BakingStepItem> Steps { get; set; } = new();
+
+    [Column(ignoreOnInsert: true, ignoreOnUpdate: true)]
     public List<ReviewItem> Reviews { get; set; } = new();
 }
