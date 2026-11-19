@@ -19,13 +19,6 @@ public class RecipeModel
     public List<ReviewItem> Reviews { get; set; } = new();
 }
 
-public class IngredientItem
-{
-    public string Name { get; set; } = string.Empty;
-    public string Amount { get; set; } = string.Empty;
-    public bool IsChecked { get; set; }
-}
-
 public class BakingStepItem
 {
     public int Number { get; set; }
