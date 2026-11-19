@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LittleCrumbs")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+75179f4f005861ade723a5e696c18f4c9d536f2c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2431069305cc37cf0443a5753260235751a1aa14")]
 [assembly: System.Reflection.AssemblyProductAttribute("LittleCrumbs")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LittleCrumbs")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
