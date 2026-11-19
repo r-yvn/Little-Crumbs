@@ -5,7 +5,6 @@
 
 <div class="min-h-screen bg-amber-50/50 text-stone-800 pb-16">
     <!-- Header Banner -->
-    
     <div class="relative bg-[#4A2E1B] text-[#F7F4EE] py-12 px-6 sm:px-12 mb-8 overflow-hidden">
         <!-- Dotted Overlay Pattern -->
         <div class="absolute inset-0 opacity-15 bg-[radial-gradient(#fde68a_1px,transparent_1px)] [background-size:16px_16px]"></div>
@@ -26,7 +25,7 @@
                 <input type="text" 
                        @bind="searchQuery" 
                        @bind:event="oninput" 
-                       placeholder="Search treat or description (e.g., matcha, croissant)..." 
+                       placeholder="Search treat title (e.g., matcha, croissant)..." 
                        class="w-full pl-10 pr-4 py-2.5 bg-amber-50/40 border border-amber-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 text-sm" />
             </div>
 
@@ -48,25 +47,88 @@
             @foreach (var recipe in FilteredRecipes)
             {
                 <div class="bg-white rounded-2xl shadow-sm border border-amber-100 overflow-hidden hover:shadow-md transition group flex flex-col">
+                    <!-- Image & Badges -->
                     <div class="w-full aspect-square bg-amber-100 relative overflow-hidden">
                         <img src="@recipe.ImageUrl" alt="@recipe.Title" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+                        
+                        @if (recipe.IsFeatured)
+                        {
+                            <span class="absolute top-3 left-3 bg-amber-500 text-white text-xs font-bold px-2.5 py-1 rounded-full shadow-sm">
+                                ★ Featured
+                            </span>
+                        }
+
                         <span class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-amber-900 text-xs font-bold px-2.5 py-1 rounded-full shadow-sm">
                             @recipe.Category
                         </span>
                     </div>
+
+                    <!-- Card Body -->
                     <div class="p-6 flex-1 flex flex-col justify-between">
                         <div>
+                            <!-- Rating & Prep/Bake/Yield Meta -->
                             <div class="flex items-center justify-between text-xs text-stone-500 mb-2">
-                                <span>⏱️ @recipe.PrepTimeMinutes mins</span>
-                                <span>⭐ @recipe.Rating (@recipe.ReviewCount)</span>
+                                <span>⭐ @recipe.Rating.ToString("0.0") (@recipe.ReviewCount)</span>
+                                <span>🍽️ @recipe.Servings @(recipe.Servings == 1 ? "serving" : "servings")</span>
                             </div>
+
+                            <div class="flex items-center gap-3 text-xs text-stone-500 mb-3">
+                                <span>Prep: @recipe.PrepTimeMinutes</span>
+                                <span>•</span>
+                                <span>Bake: @recipe.BakeTimeMinutes</span>
+                                <span>•</span>
+                                <span>Total: @(recipe.PrepTimeMinutes + recipe.BakeTimeMinutes)m</span>
+                            </div>
+
+                            <!-- Title & Description -->
                             <h3 class="text-xl font-bold text-stone-900 group-hover:text-amber-800 transition mb-2 font-serif">
                                 @recipe.Title
                             </h3>
                             <p class="text-stone-600 text-sm line-clamp-2 mb-4">
                                 @recipe.Description
                             </p>
+
+                            <!-- Counts for Ingredients, Steps, and Reviews -->
+                            <div class="grid grid-cols-3 gap-2 text-center bg-amber-50/60 border border-amber-100 rounded-xl p-2.5 mb-4 text-xs">
+                                <div>
+                                    <div class="font-bold text-amber-950">@recipe.Ingredients.Count</div>
+                                    <div class="text-stone-500">Ingredients</div>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-amber-950">@recipe.Steps.Count</div>
+                                    <div class="text-stone-500">Steps</div>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-amber-950">@recipe.Reviews.Count</div>
+                                    <div class="text-stone-500">Reviews</div>
+                                </div>
+                            </div>
+
+                            <!-- Preview of First Ingredient, Step, and Latest Review -->
+                            <div class="space-y-2 text-xs text-stone-600 mb-5 border-t border-amber-100 pt-3">
+                                @if (recipe.Ingredients.Count > 0)
+                                {
+                                    <p class="truncate">
+                                        <span class="font-semibold text-stone-800">Key Ingredient:</span>
+                                        @recipe.Ingredients[0].Amount @recipe.Ingredients[0].Name
+                                    </p>
+                                }
+                                @if (recipe.Steps.Count > 0)
+                                {
+                                    <p class="truncate">
+                                        <span class="font-semibold text-stone-800">Step @recipe.Steps[0].Number (@recipe.Steps[0].Title):</span>
+                                        @recipe.Steps[0].Instruction
+                                    </p>
+                                }
+                                @if (recipe.Reviews.Count > 0)
+                                {
+                                    <p class="italic text-stone-500 truncate">
+                                        "@recipe.Reviews[0].Comment" — @recipe.Reviews[0].Author (@recipe.Reviews[0].TimeAgo)
+                                    </p>
+                                }
+                            </div>
                         </div>
+
                         <a href="/recipe/@recipe.Id" style="text-decoration: none; color: #78350f;" class="w-full text-center bg-amber-50 hover:bg-amber-100 font-medium py-2.5 rounded-xl transition text-sm block">
                             Start Baking
                         </a>
@@ -93,16 +155,179 @@
     private string searchQuery = "";
     private string selectedCategory = "All";
 
-    private List<string> filterCategories = new() { "All", "Cakes", "Pastries", "Cookies" };
+    private List<string> filterCategories = new() { "All", "Cakes", "Pastries", "Cookies", "Breads" };
 
     private List<RecipeModel> allRecipes = new()
     {
-        new RecipeModel { Id = 1, Title = "Strawberry Matcha Layer Cake", Description = "A delightful fusion of earthy Japanese matcha sponge and sweet fresh strawberry cream filling.", Category = "Cakes", ImageUrl = "images/Strawberry Matcha Layer Cake.jpg", PrepTimeMinutes = 45, Rating = 4.9, ReviewCount = 38 },
-        new RecipeModel { Id = 2, Title = "Flaky Butter Croissants", Description = "Master the art of lamination with golden, crispy layers of buttery pastry perfection.", Category = "Pastries", ImageUrl = "images/Flaky Butter Croissants.jpeg", PrepTimeMinutes = 180, Rating = 4.8, ReviewCount = 24 },
-        new RecipeModel { Id = 3, Title = "Chunky Chocolate Chip Cookies", Description = "Crispy on the outside, gooey on the inside with pools of dark chocolate chunks.", Category = "Cookies", ImageUrl = "images/Chunky Chocolate Chip Cookies.jpg", PrepTimeMinutes = 25, Rating = 5.0, ReviewCount = 56 },
-        new RecipeModel { Id = 4, Title = "Classic Cinnamon Rolls", Description = "Soft, fluffy dough swirled with rich cinnamon brown sugar and topped with cream cheese glaze.", Category = "Pastries", ImageUrl = "images/Classic Cinnamon Rolls.jpg", PrepTimeMinutes = 90, Rating = 4.9, ReviewCount = 42 },
-        new RecipeModel { Id = 5, Title = "Lemon Raspberry Tart", Description = "Zesty lemon curd paired with tart fresh raspberries in a buttery shortcrust pastry shell.", Category = "Cakes", ImageUrl = "images/Lemon Raspberry Tart.jpg", PrepTimeMinutes = 60, Rating = 4.7, ReviewCount = 19 },
-        new RecipeModel { Id = 6, Title = "Double Fudge Brownies", Description = "Rich, dense, and deeply chocolatey fudge squares topped with flaky sea salt.", Category = "Cookies", ImageUrl = "images/Double Fudge Brownies.jpg", PrepTimeMinutes = 35, Rating = 4.9, ReviewCount = 61 }
+        new RecipeModel
+        {
+            Id = 1,
+            Title = "Strawberry Matcha Layer Cake",
+            Description = "A delightful fusion of earthy Japanese matcha sponge and sweet fresh strawberry cream filling.",
+            Category = "Cakes",
+            ImageUrl = "images/Strawberry Matcha Layer Cake.jpg",
+            PrepTimeMinutes = 45,
+            BakeTimeMinutes = 30,
+            Servings = 8,
+            Rating = 4.9,
+            ReviewCount = 38,
+            IsFeatured = true,
+            Ingredients = new()
+            {
+                new IngredientItem { Id = 1, RecipeId = 1, Name = "Ceremonial matcha powder", Amount = "2 tbsp", IsChecked = false },
+                new IngredientItem { Id = 2, RecipeId = 1, Name = "Cake flour", Amount = "1 ½ cups", IsChecked = false },
+                new IngredientItem { Id = 3, RecipeId = 1, Name = "Fresh strawberries, sliced", Amount = "1 ½ cups", IsChecked = false }
+            },
+            Steps = new()
+            {
+                new BakingStepItem { Id = 1, RecipeId = 1, Number = 1, Title = "Prep Pans & Oven", Instruction = "Preheat oven to 350°F (175°C) and line two 8-inch round cake pans." },
+                new BakingStepItem { Id = 2, RecipeId = 1, Number = 2, Title = "Bake Sponge", Instruction = "Fold sifted matcha and flour into whipped egg batter and bake for 28–30 minutes." }
+            },
+            Reviews = new()
+            {
+                new ReviewItem { Id = 1, RecipeId = 1, Author = "Mikaela R.", Rating = 5.0, Comment = "Light sponge and not overly sweet!", TimeAgo = "2 days ago" }
+            }
+        },
+        new RecipeModel
+        {
+            Id = 2,
+            Title = "Flaky Butter Croissants",
+            Description = "Master the art of lamination with golden, crispy layers of buttery pastry perfection.",
+            Category = "Pastries",
+            ImageUrl = "images/Flaky Butter Croissants.jpeg",
+            PrepTimeMinutes = 180,
+            BakeTimeMinutes = 20,
+            Servings = 6,
+            Rating = 4.8,
+            ReviewCount = 24,
+            IsFeatured = true,
+            Ingredients = new()
+            {
+                new IngredientItem { Id = 4, RecipeId = 2, Name = "Bread flour", Amount = "4 cups", IsChecked = false },
+                new IngredientItem { Id = 5, RecipeId = 2, Name = "Unsalted cultured butter", Amount = "1 ¼ cups", IsChecked = false }
+            },
+            Steps = new()
+            {
+                new BakingStepItem { Id = 3, RecipeId = 2, Number = 1, Title = "Detrempe & Butter Block", Instruction = "Mix dough, chill overnight, then lock in the cold butter block." },
+                new BakingStepItem { Id = 4, RecipeId = 2, Number = 2, Title = "Bake Until Golden", Instruction = "Proof until doubled and bake at 400°F (200°C) for 18–20 minutes." }
+            },
+            Reviews = new()
+            {
+                new ReviewItem { Id = 2, RecipeId = 2, Author = "Kenji T.", Rating = 4.8, Comment = "Honeycomb interior on my second batch.", TimeAgo = "5 days ago" }
+            }
+        },
+        new RecipeModel
+        {
+            Id = 3,
+            Title = "Chunky Chocolate Chip Cookies",
+            Description = "Crispy on the outside, gooey on the inside with pools of dark chocolate chunks.",
+            Category = "Cookies",
+            ImageUrl = "images/Chunky Chocolate Chip Cookies.jpg",
+            PrepTimeMinutes = 25,
+            BakeTimeMinutes = 12,
+            Servings = 12,
+            Rating = 5.0,
+            ReviewCount = 56,
+            IsFeatured = false,
+            Ingredients = new()
+            {
+                new IngredientItem { Id = 6, RecipeId = 3, Name = "Dark chocolate chunks", Amount = "1 ¾ cups", IsChecked = false },
+                new IngredientItem { Id = 7, RecipeId = 3, Name = "Brown sugar, packed", Amount = "1 cup", IsChecked = false }
+            },
+            Steps = new()
+            {
+                new BakingStepItem { Id = 5, RecipeId = 3, Number = 1, Title = "Cream & Fold", Instruction = "Cream butter and sugars, mix in egg and vanilla, then fold in flour and chocolate." },
+                new BakingStepItem { Id = 6, RecipeId = 3, Number = 2, Title = "Bake Soft", Instruction = "Bake at 375°F (190°C) for 11–13 minutes until edges are golden." }
+            },
+            Reviews = new()
+            {
+                new ReviewItem { Id = 3, RecipeId = 3, Author = "Alyssa D.", Rating = 5.0, Comment = "Best chocolate pool ratio ever.", TimeAgo = "1 week ago" }
+            }
+        },
+        new RecipeModel
+        {
+            Id = 4,
+            Title = "Classic Cinnamon Rolls",
+            Description = "Soft, fluffy dough swirled with rich cinnamon brown sugar and topped with cream cheese glaze.",
+            Category = "Pastries",
+            ImageUrl = "images/Classic Cinnamon Rolls.jpg",
+            PrepTimeMinutes = 90,
+            BakeTimeMinutes = 25,
+            Servings = 9,
+            Rating = 4.9,
+            ReviewCount = 42,
+            IsFeatured = false,
+            Ingredients = new()
+            {
+                new IngredientItem { Id = 8, RecipeId = 4, Name = "Ground cinnamon", Amount = "2 tbsp", IsChecked = false },
+                new IngredientItem { Id = 9, RecipeId = 4, Name = "Cream cheese, softened", Amount = "4 oz", IsChecked = false }
+            },
+            Steps = new()
+            {
+                new BakingStepItem { Id = 7, RecipeId = 4, Number = 1, Title = "Roll & Fill", Instruction = "Roll dough into a rectangle, spread butter and cinnamon sugar, and roll tightly." },
+                new BakingStepItem { Id = 8, RecipeId = 4, Number = 2, Title = "Bake & Glaze", Instruction = "Bake at 350°F (175°C) for 22–25 minutes and top with cream cheese frosting." }
+            },
+            Reviews = new()
+            {
+                new ReviewItem { Id = 4, RecipeId = 4, Author = "Paolo M.", Rating = 4.9, Comment = "Super pillowy even the next morning.", TimeAgo = "3 days ago" }
+            }
+        },
+        new RecipeModel
+        {
+            Id = 5,
+            Title = "Lemon Raspberry Tart",
+            Description = "Zesty lemon curd paired with tart fresh raspberries in a buttery shortcrust pastry shell.",
+            Category = "Cakes",
+            ImageUrl = "images/Lemon Raspberry Tart.jpg",
+            PrepTimeMinutes = 60,
+            BakeTimeMinutes = 20,
+            Servings = 8,
+            Rating = 4.7,
+            ReviewCount = 19,
+            IsFeatured = false,
+            Ingredients = new()
+            {
+                new IngredientItem { Id = 10, RecipeId = 5, Name = "Fresh lemon juice & zest", Amount = "½ cup", IsChecked = false },
+                new IngredientItem { Id = 11, RecipeId = 5, Name = "Fresh raspberries", Amount = "1 cup", IsChecked = false }
+            },
+            Steps = new()
+            {
+                new BakingStepItem { Id = 9, RecipeId = 5, Number = 1, Title = "Blind Bake Crust", Instruction = "Press pastry into a tart pan, dock with a fork, and bake until crisp." },
+                new BakingStepItem { Id = 10, RecipeId = 5, Number = 2, Title = "Fill & Chill", Instruction = "Spoon cooled lemon curd into the shell, chill, and garnish with raspberries." }
+            },
+            Reviews = new()
+            {
+                new ReviewItem { Id = 5, RecipeId = 5, Author = "Chloe S.", Rating = 4.7, Comment = "Bright citrus flavor balances the crust.", TimeAgo = "4 days ago" }
+            }
+        },
+        new RecipeModel
+        {
+            Id = 6,
+            Title = "Double Fudge Brownies",
+            Description = "Rich, dense, and deeply chocolatey fudge squares topped with flaky sea salt.",
+            Category = "Cookies",
+            ImageUrl = "images/Double Fudge Brownies.jpg",
+            PrepTimeMinutes = 35,
+            BakeTimeMinutes = 30,
+            Servings = 16,
+            Rating = 4.9,
+            ReviewCount = 61,
+            IsFeatured = true,
+            Ingredients = new()
+            {
+                new IngredientItem { Id = 12, RecipeId = 6, Name = "Unsweetened cocoa powder", Amount = "¾ cup", IsChecked = false },
+                new IngredientItem { Id = 13, RecipeId = 6, Name = "Flaky sea salt", Amount = "1 tsp", IsChecked = false }
+            },
+            Steps = new()
+            {
+                new BakingStepItem { Id = 11, RecipeId = 6, Number = 1, Title = "Melt Chocolate & Butter", Instruction = "Melt chocolate and butter together, whisk in sugar and eggs, then fold in dry ingredients." },
+                new BakingStepItem { Id = 12, RecipeId = 6, Number = 2, Title = "Bake & Sprinkle", Instruction = "Bake at 350°F (175°C) for 28–30 minutes and finish with flaky sea salt." }
+            },
+            Reviews = new()
+            {
+                new ReviewItem { Id = 6, RecipeId = 6, Author = "Liam G.", Rating = 5.0, Comment = "Shiny crackly top and fudgy center.", TimeAgo = "1 day ago" }
+            }
+        }
     };
 
     protected override void OnInitialized()

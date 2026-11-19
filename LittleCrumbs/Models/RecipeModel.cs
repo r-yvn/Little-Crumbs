@@ -14,22 +14,10 @@ public class RecipeModel
     public int ReviewCount { get; set; }
     public bool IsFeatured { get; set; }
 
+    
+
     public List<IngredientItem> Ingredients { get; set; } = new();
     public List<BakingStepItem> Steps { get; set; } = new();
     public List<ReviewItem> Reviews { get; set; } = new();
 }
 
-public class BakingStepItem
-{
-    public int Number { get; set; }
-    public string Title { get; set; } = string.Empty;
-    public string Instruction { get; set; } = string.Empty;
-}
-
-public class ReviewItem
-{
-    public string Author { get; set; } = string.Empty;
-    public int Rating { get; set; }
-    public string Comment { get; set; } = string.Empty;
-    public string TimeAgo { get; set; } = string.Empty;
-}
